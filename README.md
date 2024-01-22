@@ -6,7 +6,7 @@ ___
 
 ## Overview
 
-The Task Management and Collaboration Tool is a Spring Boot-based system designed to facilitate tasks. It offers a set of RESTful API endpoints for assigning and monitoring tasks, collaboration with between `manager` and `contributor`.
+The Task Management and Collaboration Tool is a Spring Boot-based application designed to facilitate tasks. It offers a set of RESTful API endpoints for assigning and monitoring tasks, collaboration with between `manager` and `contributor`.
 
 ## Technologies Used
 

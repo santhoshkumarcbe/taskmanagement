@@ -107,11 +107,25 @@ The Task Management and Collaboration Tool follows a structured data flow for ma
 
 The application provides RESTful API endpoints for various functionalities:
 
-### Assignment Management
+### Assignment 
 
 - **Create Assignment:** `POST /assignment/publish`
-- **Cancel Assignment:** `DELETE /assignment/delete/{assignmentId}`
-- **Monitor Assignment:** `GET /assignment/getbyid/{assignmentId}`
+- **Get all Assignments:** `GET /assignment/getall`
+- **Get Assignment by assignmentId:** `GET /assignment/getbyid/{assignmentId}`
+- **Get all Assignments by taskId:** `GET /assignment/getallbytaskid/{taskId}`
+- **Update Status of Assignment:** `PUT /assignment/update-status`
+
+### Task
+- **Create Task:** `POST /task/post`
+- **Get all Tasks:** `GET /task/getall`
+- **Get Task by Title:** `GET /task/findbytitle/{title}`
+- **Update Task:** `PUT /task/{taskId}`
+
+### Chat
+- **Create Chat:** `POST /chat/post`
+- **Get all chats:** `GET /chat/getallchats`
+- **Delete Chat:** `DELETE /chat/{chatId}`
+
 
 ### Delete operations
 

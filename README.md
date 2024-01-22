@@ -45,7 +45,7 @@ The project follows a structured and organized architecture:
 
 ## Data Flow
 
-The Task Management System follows a structured data flow for managing appointments and user authentication:
+The Task Management System follows a structured data flow for managing assignments and collaboration:
 
 1. **Task Creation**:
     - A task can be created by manager by sending a `POST` request to `/task/post` endpoint, specifying task title, description and Due date with time.

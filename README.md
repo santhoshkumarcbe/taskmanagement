@@ -1,4 +1,4 @@
-# <h1 align="center"> Task Management System </h1>
+# <h1 align="center"> Task Management System and Collaboration Tool</h1>
 ___ 
 
 
@@ -6,7 +6,7 @@ ___
 
 ## Overview
 
-The Task Management System is a Spring Boot-based system designed to facilitate tasks. It offers a set of RESTful API endpoints for assigning and managing tasks, user authentication, and user profiles with different roles (contributor, manager, admin).
+The Task Management and Collaboration Tool is a Spring Boot-based system designed to facilitate tasks. It offers a set of RESTful API endpoints for assigning and monitoring tasks, collaboration with between `manager` and `contributor`.
 
 ## Technologies Used
 
@@ -40,12 +40,12 @@ The project follows a structured and organized architecture:
 - **Main Application Class:** The entry point for the application is defined in the main class.
 - **Entities:** The application includes entities such as `User`, `Task`, `Assignment`, and `Chat` to model the data.
 - **Repository Interfaces:** Spring Data JPA repository interfaces manage data access.
-- **Service Classes:** Business logic is implemented in service classes for managing assignments,tasks, authentication, and users.
-- **Controller Classes:** These classes define and document RESTful API endpoints for creating, assigning and monitoring tasks, user authentication, and user profiles.
+- **Service Classes:** Business logic is implemented in service classes for managing assignments,tasks, collaboration, and users.
+- **Controller Classes:** These classes define and document RESTful API endpoints for creating, assigning, monitoring tasks and contributor and manager collaboration.
 
 ## Data Flow
 
-The Task Management System follows a structured data flow for managing assignments and collaboration:
+The Task Management and Collaboration Tool follows a structured data flow for managing assignments and collaboration:
 
 1. **Task Creation**:
     - A task can be created by manager by sending a `POST` request to `/task/post` endpoint, specifying task title, description and Due date with time.
@@ -57,11 +57,11 @@ The Task Management System follows a structured data flow for managing assignmen
     - The system sends a response indicating a successful task creation.
 
 2. **Assigning and Monitoring task**:
-    - A manager can assign task by sending a `POST` request to the `/assignment/publish` endpoint, specifying the contributor userId to assign task to contributor.
+    - A manager can assign task by sending a `POST` request to the `/assignment/publish` endpoint, specifying the contributor `userId` to assign task to contributor.
 
-    - The system fetch user by userId given in `Assignment` entity, if the provided userId exists and checks wheather the userRole is contributor.
+    - The system fetch user by userId given in `Assignment` entity, if the provided `userId` exists and checks wheather the `userRole` is `contributor`.
 
-    - If the userRole is contributor, task is assigned to the contributor and assignment stored in the database.
+    - If the `userRole` is `contributor`, task is assigned to the contributor and `assignment` stored in the database.
 
     - A contributor can update their task status by sending a `PUT` request to the `/assignment/update-status` as `RequestParam` with value for keys `assignmentId` and `status`.
 
@@ -96,12 +96,11 @@ The Task Management System follows a structured data flow for managing assignmen
     - User authentication and authorization are handled securely, ensuring that user credentials are protected and that authentication tokens are used for secure API access.
 
 7. **Data Persistence**:
-    - The application relies on a relational database for data storage. Entities like users, tasks, assignments, and authentication tokens are mapped to the corresponding database tables.
+    - The application relies on a relational database for data storage. Entities like `User`, `Task`, `Assignment`, and `Chat` are mapped to the corresponding database tables.
 
 8. **RESTful API Endpoints**:
     - RESTful API endpoints provide a clear interface for managers to create, assign and monitor assignments.
 
-> This data flow demonstrates how manager can interact with the application, create tasks, assign and monitor assignments through assignment and task tables 
 
 
 ## RESTful API Endpoints
@@ -201,7 +200,7 @@ Example configuration for MySQL:
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/taskmanager
 spring.datasource.username=username
-spring.datasource.password=***********
+spring.datasource.password=password
 spring.jpa.properties.hibernate.show_sql=true
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQLDialect
@@ -212,9 +211,7 @@ Please replace `spring.datasource.url`, `spring.datasource.username`, and `sprin
 
 ## Project Summary
 
-Task Management and Colloboration Tool is a Spring Boot-based system that simplifies manager-contributor task management and collaboration. It provides RESTful API endpoints for creating, assigning and monitoring tasks, user authentication, and collaboration.
-
-The application is built on a solid foundation, utilizing Spring Boot and MySQL for data storage, and it follows best practices for clean code, separation of concerns, and secure user data handling.
+Task Management and Colloboration Tool is a Spring Boot-based system that simplifies manager-contributor task management and collaboration. It provides RESTful API endpoints for creating, assigning and monitoring tasks, and collaboration.
 
 
 ### Acknowledgments

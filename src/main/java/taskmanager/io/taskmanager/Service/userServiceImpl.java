@@ -87,4 +87,14 @@ public class userServiceImpl implements userService {
         return userRepository.getByMobileNumber(mobileNumber);
     }
 
+    @Override
+    public String deleteUser(int userId) {
+        User u = userRepository.findById(userId).orElse(null);
+        if (u!=null) {
+            userRepository.delete(u);
+            return "true";
+        }
+        return "User not found";
+    }
+
 }

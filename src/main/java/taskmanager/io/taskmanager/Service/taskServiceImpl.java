@@ -27,6 +27,9 @@ public class taskServiceImpl implements taskService {
     public String addTask(Task task) {
         try {
             User u = userRepository.getByUserId(task.getManagerId());
+            if (u!=null && !u.getUserRole().equals("contributor")) {
+                u = null;
+            }
             Task t = findByTitle(task.getTitle());
 
             if (t == null && u != null) {

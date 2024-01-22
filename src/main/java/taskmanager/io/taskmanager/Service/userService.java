@@ -2,6 +2,7 @@ package taskmanager.io.taskmanager.Service;
 
 import java.util.List;
 
+import taskmanager.io.taskmanager.Model.Chat;
 import taskmanager.io.taskmanager.Model.User;
 
 public interface userService {
@@ -19,5 +20,7 @@ public interface userService {
     List<User> getAllUsersByRole(String userRole);
 
     User getByMobileNumber(String mobileNumber);
+
+    String deleteUser(int userId);
     
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +31,7 @@ public class userController {
             } else {
                 return new ResponseEntity<>(check, HttpStatus.CONFLICT);
             }
+            
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
@@ -121,6 +123,21 @@ public class userController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(u, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("delete/{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable("userId") int userId){
+        try {
+            if (userService.deleteUser(userId) == "true") {
+                return new ResponseEntity<>("User deleted Successfully",HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity<>("User not found",HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

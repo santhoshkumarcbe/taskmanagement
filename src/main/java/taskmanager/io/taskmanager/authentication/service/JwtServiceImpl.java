@@ -18,10 +18,10 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtServiceImpl implements JwtService {
 
-    private static final String SECRET_KEY = "vchskbfkhwejgfgkchbkweEGFKKFEKHEGF";
+    private static final String SECRET_KEY = "40c1422efa9b771681d576b904340d198155613b945c9deea3c8197862e92502";
 
     public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
+        return extractClaim(token,Claims::getSubject);
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {

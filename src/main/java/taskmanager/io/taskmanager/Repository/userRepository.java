@@ -1,6 +1,7 @@
 package taskmanager.io.taskmanager.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -20,14 +21,14 @@ public interface userRepository extends JpaRepository<User,Integer>{
 
     User getByUserId(int contributorId);
 
-    User findByUserName(String username);
+    Optional<User> findByUserName(String username);
 
     boolean existsByEmailId(String emailId);
 
-    boolean existsByUserName(String emailId);
+    boolean existsByUserName(String userName);
 
     User findByEmailId(String userName);
 
-
-    
+    boolean existsByUserId(int userId);
+  
 }

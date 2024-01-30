@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import taskmanager.io.taskmanager.Model.User;
@@ -29,7 +30,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         private final PasswordEncoder passwordEncoder;
         private final JwtService jwtService;
         private final AuthenticationManager authenticationManager;
-
 
         public ResponseEntity<AuthenticationResponse> register(RegisterRequest request) {
                 User user = User.builder()
@@ -56,6 +56,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
+                Map<String, Object> extraClaims = new HashMap<>();
+                extraClaims.put("Authorities", savedUser.getAuthorities());
                 String jwtToken = jwtService.generateToken(savedUser);
 
                 return new ResponseEntity<>(AuthenticationResponse.builder()
@@ -64,15 +66,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
 
         public ResponseEntity<AuthenticationResponse> authenticate(AuthenticationRequest request) {
+                System.out.println("Authenticate service  ");
                 authenticationManager.authenticate(
                                 new UsernamePasswordAuthenticationToken(
                                                 request.getUserName(),
                                                 request.getPassword()));
 
-                User user = userRepository.findByEmailId(request.getUserName());
-
+                UserDetails user = userRepository.findByEmailId(request.getUserName());
+                System.out.println("User :" +user);
+                System.out.println("UserName :" +request.getUserName());
                 Map<String, Object> extraClaims = new HashMap<>();
-                extraClaims.put("role", user.getUserRole());
+                extraClaims.put("Authorities", user.getAuthorities());
                 String jwtToken = jwtService.generateToken(extraClaims, user);
                 return new ResponseEntity<>(AuthenticationResponse.builder()
                                 .token(jwtToken)

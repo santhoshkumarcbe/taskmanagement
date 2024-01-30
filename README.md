@@ -119,12 +119,23 @@ The application provides RESTful API endpoints for various functionalities:
 - **Create Task:** `POST /task/post`
 - **Get all Tasks:** `GET /task/getall`
 - **Get Task by Title:** `GET /task/findbytitle/{title}`
-- **Update Task:** `PUT /task/{taskId}`
+- **Update Task:** `PUT /task/update/{taskId}`
 
 ### Chat
 - **Create Chat:** `POST /chat/post`
 - **Get all chats:** `GET /chat/getallchats`
 - **Delete Chat:** `DELETE /chat/{chatId}`
+
+### User
+- **Create User:** `POST /api/auth/register`
+- **Login User:** `POST /api/auth/login`
+- **Get User By Id:** `GET /user/getbyid/{id}`
+- **Get All Users:** `GET /user/getall`
+- **Get User By User Role:** `GET /user/getallbyrole/{role}`
+- **Get User By User Name:** `GET /user/getbyusername/{username}`
+- **Get User By User Email:** `GET /user/getbyemail/{email}`
+- **Get User By User Mobile Number:** `GET /user/getbymobilenumber/{mobilenumber}`
+- **Delete User:** `DELETE /user/delete/{userId}`
 
 
 ### Delete operations
@@ -138,6 +149,28 @@ The application provides RESTful API endpoints for various functionalities:
 ## Database Design
 
 The application uses a relational database to store data, including user and task information, assignment, chat and authentication tokens. Key attributes and tables include:
+
+### User Table
+
+| Column Name | Data Type    | Description                 |
+| ----------- | ------------ | --------------------------- |
+| userId      | INT          | Unique identifier for user |
+| emaiId      | VARCHAR(255) |  Unique emailId for user     |
+| fullName      | VARCHAR(255) | User Full Name  |
+| mobileNumber  | VARCHAR(255) | User mobile number   |
+| passwordHash  | VARCHAR(255) | Hashed password     |
+| userName      | VARCHAR(255) | User name   |
+| userRole        | VARCHAR(255) | User role ("ADMIN","MANAGER","CONTRIBUTOR")  |
+
+### Chat Table Description
+
+- `userId`: Unique identifier for each user.
+- `emailId`: Unique email Id for User
+- `fullName`: User Full Nam
+- `mobileNumber`: Unique mobile number for User
+- `passwordHash`: Hashed user password
+- `userName`: Unique user Name for User
+- `userRole`: Role of User ("ADMIN","MANAGER","CONTRIBUTOR")
 
 ### chat Table
 

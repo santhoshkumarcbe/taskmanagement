@@ -19,8 +19,7 @@ public class ApplicationConfig {
     private final taskmanager.io.taskmanager.Repository.userRepository userRepository;
     @Bean
     public UserDetailsService userDetailsService() {
-        // User u = userRepository.findByUserName(username);
-        return userName -> userRepository.findByUserName(userName);
+        return username -> userRepository.findByUserName(username).orElse(null);
     }
 
     @Bean

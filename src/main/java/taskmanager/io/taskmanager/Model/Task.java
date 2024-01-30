@@ -32,8 +32,6 @@ public class Task {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX", timezone = "Asia/Kolkata")
     private Date dueDate;
 
-    // @ManyToOne
-    // @JoinColumn(name = "user_id", nullable = false)
     private int managerId;
     
 }

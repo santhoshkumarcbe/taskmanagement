@@ -28,5 +28,4 @@ public class Chat {
 
     private LocalDateTime time = LocalDateTime.now();
 
-    
 }

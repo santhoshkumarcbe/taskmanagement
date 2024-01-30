@@ -26,8 +26,8 @@ public class taskServiceImpl implements taskService {
     @Override
     public String addTask(Task task) {
         try {
-            User u = userRepository.getByUserId(task.getManagerId());
-            if (u!=null && !u.getUserRole().equals("contributor")) {
+            User u = userRepository.findById(task.getManagerId()).orElse(null);
+            if (u!=null && !u.getUserRole().equals("manager")) {
                 u = null;
             }
             Task t = findByTitle(task.getTitle());

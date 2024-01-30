@@ -11,7 +11,7 @@ import taskmanager.io.taskmanager.Repository.chatRepository;
 import taskmanager.io.taskmanager.Repository.userRepository;
 
 @Service
-public class chatServiceImpl implements chatService{
+public class chatServiceImpl implements chatService {
 
     @Autowired
     chatRepository chatRepository;
@@ -22,25 +22,21 @@ public class chatServiceImpl implements chatService{
     @Override
     public String postChat(Chat chat) {
         try {
-            User m = userRepository.findById(chat.getManagerId()).orElse(null);
-            User c = userRepository.findById(chat.getContributorId()).orElse(null);
-            if (c!=null && m!=null) {
+            User s = userRepository.findById(chat.getSenderId()).orElse(null);
+            User r = userRepository.findById(chat.getReceiverId()).orElse(null);
+            if (r != null && s != null) {
                 chatRepository.save(chat);
-                return "true";  
-            }
-            else if(c==null && m == null){
-                return "Manager and Contributor not found";
-            }
-            else if(c!=null && m==null){
-                return "Manager not found";
-            }
-            else if(c==null && m!=null){
-                return "Contributor not found";
-            }
-            else{
+                return "true";
+            } else if (r == null && s == null) {
+                return "Sender and Receiver not found";
+            } else if (r != null && s == null) {
+                return "Sender not found";
+            } else if (r == null && s != null) {
+                return "Receiver not found";
+            } else {
                 return "Unknown request";
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             return e.getMessage();
@@ -48,9 +44,9 @@ public class chatServiceImpl implements chatService{
     }
 
     @Override
-    public List<Chat> findAllChatByManagerIdAndContributorId(int managerId, int contributorId) {
+    public List<Chat> findAllChatBySenderIdAndReceiverId(int senderId, int receiverId) {
         try {
-            return chatRepository.findAllChatByManagerIdAndContributorId(managerId,contributorId);
+            return chatRepository.findChatsBySenderAndReceiver(senderId, receiverId);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -65,5 +61,5 @@ public class chatServiceImpl implements chatService{
         }
         return "chat not found";
     }
-    
+
 }

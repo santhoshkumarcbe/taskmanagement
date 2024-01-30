@@ -28,11 +28,42 @@ public class SecurityConfiguration {
                                 .disable())
                                 .authorizeHttpRequests(requests -> requests
                                                 .requestMatchers("/api/auth/**").permitAll()
-                                                .requestMatchers("user/**").hasAnyAuthority("contributor", "ADMIN", "CONTRIBUTOR")
-                                                .requestMatchers("null").hasAnyAuthority("manager","admin")
-                                                .requestMatchers("null").hasAnyAuthority("contributor","admin")
+                                                .requestMatchers("user/register",
+                                                "user/getbyid/**",
+                                                "user/getall",
+                                                "user/getallbyrole/manager",
+                                                "user/getallbyrole/admin",
+                                                "user/getbymobilenumber/**",
+                                                "user/delete/**"
+                                                )
+                                                .hasAnyAuthority("admin")
+
+                                                .requestMatchers("user/getallbyrole/contributor",
+                                                "user/getbyusername/**",
+                                                "user/getbyemail/**",
+                                                "task/post",
+                                                "task/getall",
+                                                "task/findbytitle/**",
+                                                "task/update/**",
+                                                "task/delete/**",
+                                                "assignment/publish",
+                                                "assignment/getall",
+                                                "assignment/getallbytaskid/**",
+                                                "asssignment/delete/**"
+                                                )
+                                                .hasAnyAuthority("manager","admin")
+
+                                                .requestMatchers(
+                                                "assignment/getbyid/**",
+                                                "assignment/update-status",
+                                                "chat/post",
+                                                "chat/getallchats",
+                                                "chat/delete/**"
+                                                )
+                                                .hasAnyAuthority("contributor","manager","admin")
                                                 .anyRequest().authenticated()
                                                 )
+
                                 .sessionManagement(management -> management
                                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                                 .authenticationProvider(authenticationProvider)

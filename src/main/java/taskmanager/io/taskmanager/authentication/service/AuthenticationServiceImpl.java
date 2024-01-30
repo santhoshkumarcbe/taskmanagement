@@ -72,7 +72,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                                                 request.getUserName(),
                                                 request.getPassword()));
 
-                UserDetails user = userRepository.findByEmailId(request.getUserName());
+                                                System.out.println("Check");
+                UserDetails user = userRepository.findByUserName(request.getUserName()).orElse(null);
                 System.out.println("User :" +user);
                 System.out.println("UserName :" +request.getUserName());
                 Map<String, Object> extraClaims = new HashMap<>();

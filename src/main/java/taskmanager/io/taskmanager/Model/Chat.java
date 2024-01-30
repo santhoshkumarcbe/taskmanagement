@@ -1,5 +1,7 @@
 package taskmanager.io.taskmanager.Model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,16 +14,19 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int chatId;
 
-    private int contributorId;
+    private int senderId;
 
-    private int managerId;
+    private int receiverId;
 
     private String message;
+
+    private LocalDateTime time = LocalDateTime.now();
 
     
 }

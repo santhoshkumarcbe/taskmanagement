@@ -2,7 +2,6 @@ package taskmanager.io.taskmanager.Service;
 
 import java.util.List;
 
-import taskmanager.io.taskmanager.Model.Chat;
 import taskmanager.io.taskmanager.Model.User;
 
 public interface userService {

@@ -8,7 +8,7 @@ public interface chatService {
 
     String postChat(Chat chat);
 
-    List<Chat> findAllChatByManagerIdAndContributorId(int managerId, int contributorId);
+    List<Chat> findAllChatBySenderIdAndReceiverId(int managerId, int contributorId);
 
     String deleteChatById(int chatId);
 

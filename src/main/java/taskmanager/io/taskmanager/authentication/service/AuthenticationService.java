@@ -10,5 +10,7 @@ public interface AuthenticationService {
     ResponseEntity<AuthenticationResponse> register(RegisterRequest request);
 
     ResponseEntity<AuthenticationResponse> authenticate(AuthenticationRequest request);
+
+    String updatePassword(String newpassword, int user);
     
 }

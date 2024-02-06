@@ -15,5 +15,9 @@ public interface assignmentRepository extends JpaRepository<Assignment,Integer>{
     Assignment findByTaskIdAndContributorId(int taskId, int contributorId);
 
     List<Assignment> findAllByTaskId(int taskId);
+
+    List<Assignment> getAllByContributorId(int contributorId);
+
+    List<Assignment> findByContributorIdAndStatus(int contributorId, String status);
     
 }

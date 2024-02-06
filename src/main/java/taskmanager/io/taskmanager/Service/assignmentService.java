@@ -21,5 +21,9 @@ public interface assignmentService {
     String deleteAssignment(int assignmentId);
 
     List<Assignment> findAllByTaskId(int taskId);
+
+    List<Assignment> getAllByContributorId(int contributorId);
+
+    List<Assignment> findByIdAndStatus(int contributorId, String status);
     
 }

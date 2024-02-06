@@ -106,4 +106,15 @@ public class assignmentServiceImpl implements assignmentService {
         return assignmentRepository.findAllByTaskId(taskId);
     }
 
+    @Override
+    public List<Assignment> getAllByContributorId(int contributorId) {
+        return assignmentRepository.getAllByContributorId(contributorId);
+    }
+
+    @Override
+    public List<Assignment> findByIdAndStatus(int contributorId, String status) {
+        List<Assignment> assignments = assignmentRepository.findByContributorIdAndStatus(contributorId, status);
+        return assignments;
+    }
+
 }

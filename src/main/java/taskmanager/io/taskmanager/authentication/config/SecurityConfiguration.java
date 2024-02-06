@@ -55,6 +55,7 @@ public class SecurityConfiguration {
 
                                                 .requestMatchers(
                                                 "assignment/getbyid/**",
+                                                "/assignment/getallbycontributorid/**",
                                                 "assignment/update-status",
                                                 "chat/post",
                                                 "chat/getallchats",

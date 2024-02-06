@@ -11,11 +11,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/assignment")
 public class assignmentController {
@@ -43,6 +45,11 @@ public class assignmentController {
         return assignmentService.getAllAssignments();
     }
 
+    @GetMapping("/getallbycontributorid/{contributorId}")
+    public List<Assignment> getAllByContributorId(@PathVariable ("contributorId") int contributorId) {
+        return assignmentService.getAllByContributorId(contributorId);
+    }
+
     @GetMapping("/getbyid/{assignmentId}")
     public Assignment getByAssignmentId(@PathVariable ("assignmentId") int assignmentId) {
         return assignmentService.getByAssignmentId(assignmentId);
@@ -51,6 +58,12 @@ public class assignmentController {
     @GetMapping("/getallbytaskid/{taskId}")
     public List<Assignment> findAllByTaskId(@PathVariable ("taskId") int taskId) {
         return assignmentService.findAllByTaskId(taskId);
+    }
+
+    @GetMapping("/findbycontributoridandstatus/{contributorId}/{status}")
+    public ResponseEntity<List<Assignment>> findByIdAndStatus(@PathVariable ("contributorId") int contributorId, @PathVariable ("status") String status ) {
+        List<Assignment> assignments = assignmentService.findByIdAndStatus(contributorId, status);
+        return new ResponseEntity<>(assignments,HttpStatus.OK);
     }
     
     @PutMapping("/update-status")

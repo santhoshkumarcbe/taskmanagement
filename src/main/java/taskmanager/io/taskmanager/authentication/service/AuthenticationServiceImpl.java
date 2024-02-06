@@ -1,6 +1,5 @@
 package taskmanager.io.taskmanager.authentication.service;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,14 +72,33 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                                                 request.getPassword()));
 
                                                 System.out.println("Check");
-                UserDetails user = userRepository.findByUserName(request.getUserName()).orElse(null);
+                UserDetails userDetails = userRepository.findByUserName(request.getUserName()).orElse(null);
+                User user = userRepository.getByUserName(request.getUserName());
+                String role = user.getUserRole();
+                int userId = user.getUserId();
+                System.out.println("role : " +role);
+                System.out.println("User details:" +userDetails);
                 System.out.println("User :" +user);
                 System.out.println("UserName :" +request.getUserName());
                 Map<String, Object> extraClaims = new HashMap<>();
-                extraClaims.put("Authorities", user.getAuthorities());
-                String jwtToken = jwtService.generateToken(extraClaims, user);
+                extraClaims.put("Authorities", userDetails.getAuthorities());
+                String jwtToken = jwtService.generateToken(extraClaims, userDetails);
                 return new ResponseEntity<>(AuthenticationResponse.builder()
                                 .token(jwtToken)
+                                .userRole(role)
+                                .userId(userId)
                                 .build(), HttpStatus.OK);
         }
+
+        @Override
+        public String updatePassword(String newpassword, int userId) {
+                String password = passwordEncoder.encode(newpassword);
+                User user = userRepository.findById(userId).orElse(null);
+                user.setPasswordHash(password);
+                if(userRepository.save(user) != null) {
+                        return "true";
+                }
+                return "false";
+        }
+
 }
